@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    depends_on:
+      - postgres
+
+    environment:
+      DATABASEURL: postgres:postgres:postgres@posgres:5432/db
+      NODE_ENV: development
+      PORT: 3000
+
+    ports:
+      - '3000:8000'
+
+  postgres:
+    image: postgres:10.4
+    ports:
+      - '35000:5432'
+    environment:
+      POSTGRES_USER: posgres
+      POSTGRES_PASSWORD: posgres
+      POSTGRE_DB: db
